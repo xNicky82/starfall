@@ -22,9 +22,9 @@ targets:
       properties:
         CFBundleDisplayName: Starfall
         UILaunchScreen:
-          UIColorName: Void
+          UIColorName: Paper
         UISupportedInterfaceOrientations: [UIInterfaceOrientationPortrait]
-        UIUserInterfaceStyle: Dark
+        UIUserInterfaceStyle: Light
         UIRequiresFullScreen: true
         NSBluetoothAlwaysUsageDescription: Starfall uses Bluetooth to find nearby Starfall resonators and souls.
     settings:

@@ -1,0 +1,558 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		08F9BE616A021325639946CE /* AttuneFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4E563F950B2C5F273517C51 /* AttuneFlow.swift */; };
+		0E9D3CA62A406729469325E1 /* EssenceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD70BFB50CD02F617EC56D1 /* EssenceView.swift */; };
+		1C87A453CB4BCFBB5A6464A2 /* EncounterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5744E42528252DF8CC6070DD /* EncounterView.swift */; };
+		2D2340B92233576C0CCB2FAC /* SoulFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = B461012E64B0D444CE58F589 /* SoulFactory.swift */; };
+		46C3ABB8926FC14873DC9922 /* Sliders.swift in Sources */ = {isa = PBXBuildFile; fileRef = C563DC6D16CFC720CA59DC8B /* Sliders.swift */; };
+		471B55D2843F16E717025393 /* Resonator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCBB81CA0B72256D4359CDEA /* Resonator.swift */; };
+		5C3866AB4CCC09A566D90BBF /* Soul.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2BE3B5705A016E3B267FEBD /* Soul.swift */; };
+		6B004E227C40B3933F3B0E1C /* DriftView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8656967609056B0663FFC0 /* DriftView.swift */; };
+		78A226287B51D5BF8385B1A1 /* Resonance.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8D6B348690874712D060393 /* Resonance.swift */; };
+		7EB1D296F75ADD50D12D8D38 /* StarfallApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB50F5921840318C8950CFBA /* StarfallApp.swift */; };
+		889DEE69D5BB8F4B7A26E1C8 /* Orb.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6614ECF629A1D2C6123F082 /* Orb.swift */; };
+		9F9B9AEE4EF879DA2D7D52DA /* BankTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20AF721E24D3A927743336C /* BankTests.swift */; };
+		A96D08982D988A373861D7DD /* Catalog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12AC1CE80BEE86A6FD0F081F /* Catalog.swift */; };
+		BD7ED63BCA3EE1AE889E9A53 /* RealmEditors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 109B43052890B6764C493240 /* RealmEditors.swift */; };
+		C5B62F6A047A720BF5C05E36 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8036A51877B13F1869A0C68B /* Theme.swift */; };
+		D04E33C9E8B790C7913005F1 /* ConstellationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D76FAB599A0259AA6C525379 /* ConstellationView.swift */; };
+		E41D332F51191E6D4C5B4ABC /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35693FB4E2E89B755F7645F /* Store.swift */; };
+		E623B612A9821EEB30D5B7E1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4CF478DE5984DAC834354CC5 /* Assets.xcassets */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		BBD83E1C42C71AB762B102D8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 29713F895453A79247ADC083 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4ED7A104303B5A04399FBFD4;
+			remoteInfo = Starfall;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		109B43052890B6764C493240 /* RealmEditors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmEditors.swift; sourceTree = "<group>"; };
+		12AC1CE80BEE86A6FD0F081F /* Catalog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Catalog.swift; sourceTree = "<group>"; };
+		4CF478DE5984DAC834354CC5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		5744E42528252DF8CC6070DD /* EncounterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncounterView.swift; sourceTree = "<group>"; };
+		7BC95E4BCF0E39AE14DA5D74 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		8036A51877B13F1869A0C68B /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
+		A2BE3B5705A016E3B267FEBD /* Soul.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Soul.swift; sourceTree = "<group>"; };
+		A6614ECF629A1D2C6123F082 /* Orb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Orb.swift; sourceTree = "<group>"; };
+		A8D6B348690874712D060393 /* Resonance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resonance.swift; sourceTree = "<group>"; };
+		B20AF721E24D3A927743336C /* BankTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankTests.swift; sourceTree = "<group>"; };
+		B2ED7A8A1E4A1F78F3694D9B /* StarfallTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = StarfallTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		B35693FB4E2E89B755F7645F /* Store.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
+		B461012E64B0D444CE58F589 /* SoulFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoulFactory.swift; sourceTree = "<group>"; };
+		C563DC6D16CFC720CA59DC8B /* Sliders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sliders.swift; sourceTree = "<group>"; };
+		D76FAB599A0259AA6C525379 /* ConstellationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstellationView.swift; sourceTree = "<group>"; };
+		DAD70BFB50CD02F617EC56D1 /* EssenceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EssenceView.swift; sourceTree = "<group>"; };
+		DCBB81CA0B72256D4359CDEA /* Resonator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resonator.swift; sourceTree = "<group>"; };
+		E4E563F950B2C5F273517C51 /* AttuneFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttuneFlow.swift; sourceTree = "<group>"; };
+		EA8656967609056B0663FFC0 /* DriftView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriftView.swift; sourceTree = "<group>"; };
+		EB50F5921840318C8950CFBA /* StarfallApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarfallApp.swift; sourceTree = "<group>"; };
+		F7609AD1E8C9FB9B991F6FA7 /* Starfall.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = Starfall.app; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		18F9E46543171A28034A6A45 /* Drift */ = {
+			isa = PBXGroup;
+			children = (
+				EA8656967609056B0663FFC0 /* DriftView.swift */,
+				5744E42528252DF8CC6070DD /* EncounterView.swift */,
+			);
+			path = Drift;
+			sourceTree = "<group>";
+		};
+		19FABCA02B5149ED9B1F6536 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				EB50F5921840318C8950CFBA /* StarfallApp.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		1FACE1410933C68483FD9944 /* Starfall */ = {
+			isa = PBXGroup;
+			children = (
+				4CF478DE5984DAC834354CC5 /* Assets.xcassets */,
+				7BC95E4BCF0E39AE14DA5D74 /* Info.plist */,
+				19FABCA02B5149ED9B1F6536 /* App */,
+				277936A28FAFA9EEF2C30EC7 /* Hardware */,
+				ADB612DAD74028D26B0FF221 /* Model */,
+				9FA16932D19EA8732B174086 /* Theme */,
+				C2A90A28D6A234B98FA40353 /* Views */,
+			);
+			path = Starfall;
+			sourceTree = "<group>";
+		};
+		277936A28FAFA9EEF2C30EC7 /* Hardware */ = {
+			isa = PBXGroup;
+			children = (
+				DCBB81CA0B72256D4359CDEA /* Resonator.swift */,
+			);
+			path = Hardware;
+			sourceTree = "<group>";
+		};
+		2943D32B6DEC5B3CC8629665 /* Attune */ = {
+			isa = PBXGroup;
+			children = (
+				E4E563F950B2C5F273517C51 /* AttuneFlow.swift */,
+			);
+			path = Attune;
+			sourceTree = "<group>";
+		};
+		3787CC17388B5F28178A1C7E /* StarfallTests */ = {
+			isa = PBXGroup;
+			children = (
+				B20AF721E24D3A927743336C /* BankTests.swift */,
+			);
+			path = StarfallTests;
+			sourceTree = "<group>";
+		};
+		5F97CF859FB6BB7B4D5D7059 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				A6614ECF629A1D2C6123F082 /* Orb.swift */,
+				109B43052890B6764C493240 /* RealmEditors.swift */,
+				C563DC6D16CFC720CA59DC8B /* Sliders.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		9FA16932D19EA8732B174086 /* Theme */ = {
+			isa = PBXGroup;
+			children = (
+				8036A51877B13F1869A0C68B /* Theme.swift */,
+			);
+			path = Theme;
+			sourceTree = "<group>";
+		};
+		ADB612DAD74028D26B0FF221 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				12AC1CE80BEE86A6FD0F081F /* Catalog.swift */,
+				A8D6B348690874712D060393 /* Resonance.swift */,
+				A2BE3B5705A016E3B267FEBD /* Soul.swift */,
+				B461012E64B0D444CE58F589 /* SoulFactory.swift */,
+				B35693FB4E2E89B755F7645F /* Store.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		B008D2C0024931DB0B27EC9E /* Constellation */ = {
+			isa = PBXGroup;
+			children = (
+				D76FAB599A0259AA6C525379 /* ConstellationView.swift */,
+			);
+			path = Constellation;
+			sourceTree = "<group>";
+		};
+		B73EA30D5C0F9840DF903D20 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F7609AD1E8C9FB9B991F6FA7 /* Starfall.app */,
+				B2ED7A8A1E4A1F78F3694D9B /* StarfallTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		BDAFD09D2DB4B80491C48FA1 /* Essence */ = {
+			isa = PBXGroup;
+			children = (
+				DAD70BFB50CD02F617EC56D1 /* EssenceView.swift */,
+			);
+			path = Essence;
+			sourceTree = "<group>";
+		};
+		C2A90A28D6A234B98FA40353 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				2943D32B6DEC5B3CC8629665 /* Attune */,
+				5F97CF859FB6BB7B4D5D7059 /* Components */,
+				B008D2C0024931DB0B27EC9E /* Constellation */,
+				18F9E46543171A28034A6A45 /* Drift */,
+				BDAFD09D2DB4B80491C48FA1 /* Essence */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		D302C0861EDE6AE561008BB2 = {
+			isa = PBXGroup;
+			children = (
+				1FACE1410933C68483FD9944 /* Starfall */,
+				3787CC17388B5F28178A1C7E /* StarfallTests */,
+				B73EA30D5C0F9840DF903D20 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		4ED7A104303B5A04399FBFD4 /* Starfall */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 66B5AF37777F0C37F6C01D58 /* Build configuration list for PBXNativeTarget "Starfall" */;
+			buildPhases = (
+				790B48B7710F7038012AE02C /* Sources */,
+				9CD33EDEC753B083693B9395 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Starfall;
+			packageProductDependencies = (
+			);
+			productName = Starfall;
+			productReference = F7609AD1E8C9FB9B991F6FA7 /* Starfall.app */;
+			productType = "com.apple.product-type.application";
+		};
+		BB2E6B26CDB99AA2B76202FC /* StarfallTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A08EC06818B086B1D6C67E0D /* Build configuration list for PBXNativeTarget "StarfallTests" */;
+			buildPhases = (
+				B21893193FAEA653C2215261 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				BF0A5C91C2F54FEE925A7862 /* PBXTargetDependency */,
+			);
+			name = StarfallTests;
+			packageProductDependencies = (
+			);
+			productName = StarfallTests;
+			productReference = B2ED7A8A1E4A1F78F3694D9B /* StarfallTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		29713F895453A79247ADC083 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1600;
+				TargetAttributes = {
+					4ED7A104303B5A04399FBFD4 = {
+						DevelopmentTeam = SU37Q46M4T;
+						ProvisioningStyle = Automatic;
+					};
+					BB2E6B26CDB99AA2B76202FC = {
+						DevelopmentTeam = SU37Q46M4T;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 1809ECC68B1FA03F1930F702 /* Build configuration list for PBXProject "Starfall" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = D302C0861EDE6AE561008BB2;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = B73EA30D5C0F9840DF903D20 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				4ED7A104303B5A04399FBFD4 /* Starfall */,
+				BB2E6B26CDB99AA2B76202FC /* StarfallTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		9CD33EDEC753B083693B9395 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E623B612A9821EEB30D5B7E1 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		790B48B7710F7038012AE02C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				08F9BE616A021325639946CE /* AttuneFlow.swift in Sources */,
+				A96D08982D988A373861D7DD /* Catalog.swift in Sources */,
+				D04E33C9E8B790C7913005F1 /* ConstellationView.swift in Sources */,
+				6B004E227C40B3933F3B0E1C /* DriftView.swift in Sources */,
+				1C87A453CB4BCFBB5A6464A2 /* EncounterView.swift in Sources */,
+				0E9D3CA62A406729469325E1 /* EssenceView.swift in Sources */,
+				889DEE69D5BB8F4B7A26E1C8 /* Orb.swift in Sources */,
+				BD7ED63BCA3EE1AE889E9A53 /* RealmEditors.swift in Sources */,
+				78A226287B51D5BF8385B1A1 /* Resonance.swift in Sources */,
+				471B55D2843F16E717025393 /* Resonator.swift in Sources */,
+				46C3ABB8926FC14873DC9922 /* Sliders.swift in Sources */,
+				5C3866AB4CCC09A566D90BBF /* Soul.swift in Sources */,
+				2D2340B92233576C0CCB2FAC /* SoulFactory.swift in Sources */,
+				7EB1D296F75ADD50D12D8D38 /* StarfallApp.swift in Sources */,
+				E41D332F51191E6D4C5B4ABC /* Store.swift in Sources */,
+				C5B62F6A047A720BF5C05E36 /* Theme.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B21893193FAEA653C2215261 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9F9B9AEE4EF879DA2D7D52DA /* BankTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		BF0A5C91C2F54FEE925A7862 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4ED7A104303B5A04399FBFD4 /* Starfall */;
+			targetProxy = BBD83E1C42C71AB762B102D8 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		A8250F23246B12F57325685E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = SU37Q46M4T;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 0.1.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		C3D92F39CE7367EF60ED6779 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = ca.nordexa.starfall.tests;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Starfall.app/Starfall";
+			};
+			name = Debug;
+		};
+		D1EE792668C621892B8FAA9F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = Starfall/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = ca.nordexa.starfall;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+		D4D3DCFE86C6833909423C7B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = ca.nordexa.starfall.tests;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Starfall.app/Starfall";
+			};
+			name = Release;
+		};
+		E63FE45B5A8A1D2312A86B73 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = Starfall/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = ca.nordexa.starfall;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		FB93B2B2B99F4FC8A67202F7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = SU37Q46M4T;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 0.1.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1809ECC68B1FA03F1930F702 /* Build configuration list for PBXProject "Starfall" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FB93B2B2B99F4FC8A67202F7 /* Debug */,
+				A8250F23246B12F57325685E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		66B5AF37777F0C37F6C01D58 /* Build configuration list for PBXNativeTarget "Starfall" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E63FE45B5A8A1D2312A86B73 /* Debug */,
+				D1EE792668C621892B8FAA9F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		A08EC06818B086B1D6C67E0D /* Build configuration list for PBXNativeTarget "StarfallTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C3D92F39CE7367EF60ED6779 /* Debug */,
+				D4D3DCFE86C6833909423C7B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 29713F895453A79247ADC083 /* Project object */;
+}

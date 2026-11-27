@@ -1,0 +1,54 @@
+name: Starfall
+options:
+  bundleIdPrefix: ca.nordexa
+  deploymentTarget:
+    iOS: "17.0"
+  createIntermediateGroups: true
+settings:
+  base:
+    SWIFT_VERSION: "5.0"
+    DEVELOPMENT_TEAM: SU37Q46M4T
+    CODE_SIGN_STYLE: Automatic
+    MARKETING_VERSION: "0.1.0"
+    CURRENT_PROJECT_VERSION: "1"
+targets:
+  Starfall:
+    type: application
+    platform: iOS
+    sources:
+      - path: Starfall
+    info:
+      path: Starfall/Info.plist
+      properties:
+        CFBundleDisplayName: Starfall
+        UILaunchScreen:
+          UIColorName: AccentColor
+        UISupportedInterfaceOrientations: [UIInterfaceOrientationPortrait]
+        UIUserInterfaceStyle: Light
+        UIRequiresFullScreen: true
+        NSBluetoothAlwaysUsageDescription: Starfall uses Bluetooth to find nearby Starfall resonators and souls.
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: ca.nordexa.starfall
+        TARGETED_DEVICE_FAMILY: "1"
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME: AccentColor
+        ENABLE_PREVIEWS: YES
+  StarfallTests:
+    type: bundle.unit-test
+    platform: iOS
+    sources: [StarfallTests]
+    dependencies:
+      - target: Starfall
+    settings:
+      base:
+        GENERATE_INFOPLIST_FILE: YES
+        PRODUCT_BUNDLE_IDENTIFIER: ca.nordexa.starfall.tests
+schemes:
+  Starfall:
+    build:
+      targets:
+        Starfall: all
+        StarfallTests: [test]
+    test:
+      targets: [StarfallTests]

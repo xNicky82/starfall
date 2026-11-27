@@ -91,6 +91,15 @@ struct PersonCard: View {
                             }
                         }
                     }
+                    if !r.sharedSpecifics.isEmpty {
+                        group("Specifically") {
+                            VStack(alignment: .leading, spacing: 6) {
+                                ForEach(Array(r.sharedSpecifics.prefix(4).enumerated()), id: \.offset) { _, sp in
+                                    Text(specificLine(sp.interest, sp.name, me, s)).font(.system(size: 14))
+                                }
+                            }
+                        }
+                    }
                     if !only.isEmpty {
                         group("Only \(s.name)") {
                             FlowLayout { ForEach(only) { OrbChip(text: $0.name, color: $0.element.color, dim: true) } }
@@ -127,6 +136,30 @@ struct PersonCard: View {
             .frame(maxHeight: orbit.size.height * 0.5)
             .fixedSize(horizontal: false, vertical: true)
         }
+    }
+
+    /// "Hockey · you watch, Theo plays" — watch or play is assumed from Observe ↔ Partake when not stated.
+    private func specificLine(_ interest: String, _ name: String, _ me: Soul, _ s: Soul) -> String {
+        guard let w = Catalog.engagement[interest] else { return name }
+        func conjugate(_ v: String) -> String {
+            var parts = v.split(separator: " ").map(String.init)
+            guard var first = parts.first else { return v }
+            if first == "go" || first == "do" || ["ch", "sh", "s", "x"].contains(where: { first.hasSuffix($0) }) { first += "es" } else { first += "s" }
+            parts[0] = first
+            return parts.joined(separator: " ")
+        }
+        func verb(_ e: Engagement, _ third: Bool) -> String {
+            let base: String
+            switch e {
+            case .watch: base = w.watch.lowercased()
+            case .play: base = w.play.lowercased()
+            case .both: base = "do both"
+            }
+            return third ? conjugate(base) : base
+        }
+        let a = me.engagement(interest).mode, b = s.engagement(interest).mode
+        if a == b { return "\(name) · you both \(verb(a, false))" }
+        return "\(name) · you \(verb(a, false)), \(s.name) \(verb(b, true))"
     }
 
     private func shareWeights(_ a: Soul, _ b: Soul) -> [Element: Double] {

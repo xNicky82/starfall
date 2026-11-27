@@ -10,7 +10,7 @@ Everyone is a circle of light drifting through the same sky. Your light is made 
 - Every soul has the same **100 units of light**. Loving one thing costs loving another.
 - **Interests** max out at 20. Push one all the way past its ceiling into its slot and it **ascends**: it stops being a hobby and becomes part of its root value (Hiking → Presence, Music → Beauty, Hardware → Craft…).
 - Interests you haven't ascended still feed **25%** of their light into their root value as an *undercurrent*. Your values are partly made of the things you do.
-- **Traits** are polarities, not quantities (Stillness ↔ Motion, Solitude ↔ Communion, Heart ↔ Mind…). Some axes mend when two people sit close on them; others mend through a little difference.
+- **Nature** is eleven polarities, not quantities (Introvert ↔ Extrovert, Observe ↔ Partake, Mathematical ↔ Artistic…). Each pole belongs to an energy, so your nature decides your colours and your interests decide how strongly each colour takes hold. Some axes mend when two people sit close on them; others mend through a little difference.
 
 ### Resonance
 `score = 0.5·values (cosine) + 0.3·shared interests + 0.2·trait harmony`

@@ -47,6 +47,7 @@ struct OrbitStage: View {
         ZStack(alignment: .topLeading) {
             OrbField(orbit: orbit)
             OrbLabels(orbit: orbit)
+            ProfilePhoto(orbit: orbit)
 
             Group {
                 switch orbit.tab {

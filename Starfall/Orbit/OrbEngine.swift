@@ -27,6 +27,8 @@ final class Orb {
     var forceBand: SIMD2<Double>?
     /// 0…1 weight per energy, indexed like `Element.allCases`.
     let prof: [Double]
+    /// 0…1 how much light the soul spends on interests: how strongly its colours take hold.
+    let hold: Double
     /// 0…1 how far each energy band is slid out.
     var rev = [Double](repeating: 0, count: 5)
     /// Direction each energy band points.
@@ -44,6 +46,7 @@ final class Orb {
             let w = el[e] ?? 0
             return w > 0.04 ? w : 0
         }
+        hold = soul.hold
         bd = (0..<5).map { k in
             let a = Double(k) * 1.26 - 1.57
             return SIMD2(cos(a), sin(a))
@@ -52,7 +55,7 @@ final class Orb {
 
     func has(_ c: Int) -> Bool { prof[c] > 0 }
     /// How wide this energy's band gets when fully revealed, 0…1.
-    func amount(_ c: Int) -> Double { min(1, prof[c] * 2.5) }
+    func amount(_ c: Int) -> Double { min(1, prof[c] * 2.5) * (0.45 + 0.55 * hold) }
 }
 
 final class OrbPair {

@@ -88,6 +88,8 @@ final class Orbit {
     var frame = 0
     /// Keyboard height in points, so the composer can ride above it.
     var keyboard: CGFloat = 0
+    /// Profile: the details sheet (photo, age, location...).
+    var showDetails = false
 
     // MARK: Field (not observed; `frame` ticks instead)
     @ObservationIgnored let engine: OrbEngine
@@ -337,13 +339,13 @@ final class Orbit {
     // MARK: Interactions
 
     func tapOrb(_ o: Orb) {
-        if o.anchor { if tab != .profile { select(.profile) }; return }
+        if o.anchor { if tab == .profile { showDetails = true } else { select(.profile) }; return }
         switch tab {
         case .home, .friends:
             if sheet == .person(o.id) { closeSheet() } else { open(.person(o.id)) }
         case .inbox:
             if let t = threads.first(where: { $0.members.contains(o.id) }) { openThread(t.id) }
-        case .profile: break
+        case .profile: showDetails = true
         }
     }
     func open(_ s: OrbitSheet) { sheet = s; Resonator.shared.play(.tick) }

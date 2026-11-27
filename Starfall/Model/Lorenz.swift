@@ -68,10 +68,10 @@ extension Soul {
         let valueShare = values.values.reduce(0, +) / Soul.bank + Double(ascended.count) * 0.06
         let lead = Element.allCases.firstIndex(of: aura.first?.0 ?? .tide) ?? 1
         return LorenzParams(
-            sigma: 10 + 3 * trait("pace"),                          // stillness ↔ motion
-            rho: 25.5 + 16 * min(1, valueShare) + 3 * trait("fire"), // what you hold deepens the wings
-            beta: 8.0 / 3.0 + 0.35 * trait("compass"),               // heart ↔ mind
-            yaw: Double(lead) * 0.55 - 1.1 + 0.25 * trait("gaze"),
+            sigma: 10 - 3 * trait("tempo"),                           // haste ↔ concentration
+            rho: 25.5 + 16 * min(1, valueShare) + 3 * trait("volume"), // what you hold deepens the wings
+            beta: 8.0 / 3.0 - 0.35 * trait("craft"),                   // mathematical ↔ artistic
+            yaw: Double(lead) * 0.55 - 1.1 + 0.25 * trait("time"),
             pitch: 0.12 * trait("social"))
     }
 }

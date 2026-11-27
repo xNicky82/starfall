@@ -177,7 +177,7 @@ struct DriftView: View {
     var body: some View {
         ZStack {
             SanctuaryBackground(glow: store.me?.hue ?? SF.blue)
-            OrbitGuides(count: 5).frame(width: 760, height: 760).opacity(0.8)
+            OrbitGuides(count: 5).scaleEffect(1.9).opacity(0.8)
             GeometryReader { geo in
                 TimelineView(.animation(minimumInterval: nil, paused: encounter != nil)) { tl in
                     Canvas { ctx, _ in
@@ -213,14 +213,15 @@ struct DriftView: View {
                     store.record(e.soul, choice: choice, resonance: e.res)
                     sim.markMet(e.soul.id)
                     sim.paused = false
-                    withAnimation(.easeInOut(duration: 0.45)) { encounter = nil }
+                    withAnimation(.easeInOut(duration: 0.45)) { encounter = nil; store.inEncounter = false }
                 }
                 .transition(.opacity.combined(with: .scale(scale: 1.04)))
                 .zIndex(2)
             }
         }
+        .onDisappear { store.inEncounter = false }
         .onAppear {
-            sim.onCollide = { soul, res in withAnimation(.easeInOut(duration: 0.5)) { encounter = Encounter(soul: soul, res: res) } }
+            sim.onCollide = { soul, res in withAnimation(.easeInOut(duration: 0.5)) { encounter = Encounter(soul: soul, res: res); store.inEncounter = true } }
         }
     }
 

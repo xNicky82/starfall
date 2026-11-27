@@ -107,11 +107,7 @@ extension Soul {
         let a = aura.prefix(3).map { $0.0.color }
         return a.isEmpty ? [SF.blue] : a
     }
-    /// A single blended colour — the soul's "frequency".
-    var hue: Color {
-        var c = SIMD3<Double>(0, 0, 0)
-        for (el, w) in elements { c += el.rgb * w }
-        return Color(red: c.x, green: c.y, blue: c.z)
-    }
+    /// The soul's dominant energy colour (blending all of them turns to mud).
+    var hue: Color { aura.first?.0.color ?? SF.blue }
     var isAttuned: Bool { !interests.isEmpty && spent > 0 }
 }

@@ -1,0 +1,39 @@
+name: TestFlight
+
+# Every push to main ships a new TestFlight build once these repo secrets exist:
+#   ASC_KEY_ID, ASC_ISSUER_ID, ASC_KEY_P8 (contents of AuthKey_XXXX.p8), TEAM_ID
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  ship:
+    runs-on: macos-latest
+    env:
+      HAS_KEY: ${{ secrets.ASC_KEY_P8 != '' }}
+    steps:
+      - uses: actions/checkout@v4
+        with: { fetch-depth: 0 }
+      - name: Skip (no App Store Connect key yet)
+        if: env.HAS_KEY != 'true'
+        run: echo "ASC secrets not configured; skipping TestFlight upload."
+      - name: Tools
+        if: env.HAS_KEY == 'true'
+        run: brew install xcodegen
+      - name: Test
+        if: env.HAS_KEY == 'true'
+        run: |
+          xcodegen generate
+          xcodebuild test -project Starfall.xcodeproj -scheme Starfall \
+            -destination 'platform=iOS Simulator,name=iPhone 16' CODE_SIGNING_ALLOWED=NO -quiet
+      - name: Archive & upload
+        if: env.HAS_KEY == 'true'
+        env:
+          ASC_KEY_ID: ${{ secrets.ASC_KEY_ID }}
+          ASC_ISSUER_ID: ${{ secrets.ASC_ISSUER_ID }}
+          TEAM_ID: ${{ secrets.TEAM_ID }}
+        run: |
+          mkdir -p ~/private_keys
+          echo "${{ secrets.ASC_KEY_P8 }}" > ~/private_keys/AuthKey_${ASC_KEY_ID}.p8
+          ASC_KEY_PATH=~/private_keys/AuthKey_${ASC_KEY_ID}.p8 scripts/testflight.sh

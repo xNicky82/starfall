@@ -16,6 +16,8 @@ final class Store {
     var me: Soul? { didSet { save() } }
     var bonds: [BondRecord] = [] { didSet { save() } }
     let others: [Soul] = SoulFactory.field()
+    /// Transient: hides navigation while two souls are meeting.
+    var inEncounter = false
 
     private struct Saved: Codable { var me: Soul?; var bonds: [BondRecord] }
     private let url = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]

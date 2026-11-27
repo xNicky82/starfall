@@ -15,7 +15,7 @@ struct StarfallApp: App {
 
 struct RootView: View {
     @Environment(Store.self) private var store
-    @State private var tab = 0
+    @State private var tab = UserDefaults.standard.integer(forKey: "tab") // launch arg `-tab N` for previews
 
     var body: some View {
         Group {
@@ -31,8 +31,11 @@ struct RootView: View {
                         }
                     }
                     .transition(.opacity)
-                    OrbitBar(selection: $tab, me: store.me)
-                        .padding(.bottom, 8)
+                    if !store.inEncounter {
+                        OrbitBar(selection: $tab, me: store.me)
+                            .padding(.bottom, 8)
+                            .transition(.move(edge: .bottom).combined(with: .opacity))
+                    }
                 }
                 .transition(.opacity)
             }

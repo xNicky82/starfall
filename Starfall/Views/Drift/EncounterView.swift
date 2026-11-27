@@ -61,12 +61,15 @@ struct EncounterView: View {
                 }
                 .padding(.horizontal, 22)
             }
-            VStack {
+            VStack(spacing: 0) {
                 Spacer()
+                LinearGradient(colors: [SF.paper.opacity(0), SF.paper], startPoint: .top, endPoint: .bottom)
+                    .frame(height: 40).allowsHitTesting(false)
                 DualSlotSlider(leftLabel: "drift on", rightLabel: "bond", colors: me.auraColors, rightTint: tint,
                                onLeft: { onChoice(.released) },
                                onRight: { Resonator.shared.play(.mend); onChoice(.bonded) })
                     .padding(.horizontal, 22).padding(.bottom, 18)
+                    .background(SF.paper.ignoresSafeArea(edges: .bottom))
             }
         }
     }
@@ -136,7 +139,8 @@ struct EncounterView: View {
             HStack(spacing: 8) {
                 ForEach(facets) { f in
                     HStack(spacing: 6) {
-                        Glyph(element: f.element, size: 8)
+                        if filled { Circle().fill(.white.opacity(0.9)).frame(width: 6, height: 6) }
+                        else { Glyph(element: f.element, size: 8) }
                         Text(f.name).font(SF.label(12)).foregroundStyle(filled ? .white : SF.ink)
                     }
                     .padding(.horizontal, 12).padding(.vertical, 8)

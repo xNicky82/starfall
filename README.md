@@ -35,4 +35,8 @@ brew install xcodegen
 xcodegen generate
 open Starfall.xcodeproj
 ```
-iOS 17+, SwiftUI, no dependencies. Ship a TestFlight build: `scripts/testflight.sh`.
+iOS 17+, SwiftUI, no dependencies.
+
+- `scripts/device.sh`: build, install and launch on the USB-connected iPhone.
+- `scripts/testflight.sh`: archive and upload to TestFlight (needs a paid Apple Developer team + App Store Connect API key).
+- `.github/workflows/testflight.yml`: every push to `main` ships to TestFlight once the `ASC_*` / `TEAM_ID` repo secrets exist.

@@ -242,11 +242,11 @@
 				LastUpgradeCheck = 1600;
 				TargetAttributes = {
 					4ED7A104303B5A04399FBFD4 = {
-						DevelopmentTeam = SU37Q46M4T;
+						DevelopmentTeam = M426335VZ3;
 						ProvisioningStyle = Automatic;
 					};
 					BB2E6B26CDB99AA2B76202FC = {
-						DevelopmentTeam = SU37Q46M4T;
+						DevelopmentTeam = M426335VZ3;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -362,7 +362,7 @@
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = SU37Q46M4T;
+				DEVELOPMENT_TEAM = M426335VZ3;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -395,7 +395,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = ca.nordexa.starfall.tests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.xnicky82.starfall.tests;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Starfall.app/Starfall";
@@ -414,7 +414,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = ca.nordexa.starfall;
+				PRODUCT_BUNDLE_IDENTIFIER = com.xnicky82.starfall;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -430,7 +430,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = ca.nordexa.starfall.tests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.xnicky82.starfall.tests;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Starfall.app/Starfall";
@@ -449,7 +449,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = ca.nordexa.starfall;
+				PRODUCT_BUNDLE_IDENTIFIER = com.xnicky82.starfall;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -492,7 +492,7 @@
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = SU37Q46M4T;
+				DEVELOPMENT_TEAM = M426335VZ3;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;

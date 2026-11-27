@@ -1,5 +1,7 @@
 # Starfall UI instructions
 
+> The app shell after Attune now follows [ORBIT.md](ORBIT.md). Where the two disagree (glass, a tab bar with icons, chat, percentages), Orbit wins. The rest of this document still applies to Attune, Essence and the pebble.
+
 Source: [Nordexa / starfall board](https://ca.pinterest.com/NordexaInc/starfall/) (poster design, generative art, motion graphics, logo). Principles only — do not clone pins.
 
 The phone is a stand-in. The real UI is a pebble that hums when someone kindred drifts close. Every screen below must survive being reduced to **light + vibration + one slide**.

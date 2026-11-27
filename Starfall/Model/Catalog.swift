@@ -8,11 +8,12 @@ enum Element: String, Codable, CaseIterable, Identifiable {
 
     var rgb: SIMD3<Double> {
         switch self {
-        case .ember:  return [255, 128, 84] / 255
-        case .tide:   return [60, 135, 237] / 255
-        case .grove:  return [62, 196, 152] / 255
-        case .sol:    return [247, 194, 88] / 255
-        case .aether: return [150, 116, 255] / 255
+        // Orbit palette: coral, blue, orange, yellow, lavender.
+        case .ember:  return [238, 78, 43] / 255
+        case .tide:   return [60, 147, 216] / 255
+        case .grove:  return [245, 139, 44] / 255
+        case .sol:    return [243, 192, 42] / 255
+        case .aether: return [158, 162, 220] / 255
         }
     }
     var color: Color { Color(red: rgb.x, green: rgb.y, blue: rgb.z) }

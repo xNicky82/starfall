@@ -21,8 +21,8 @@ Ember (fire) · Tide (water, Starfall Blue) · Grove (earth) · Sol (light) · A
 
 ## Screens
 - **Attune**: name → gather interests → weigh (bank + ascension slots) → traits → values → reveal. You move forward by sliding a circle into its slot.
-- **Orbit**: after Attune the app is one persistent field of gooey orbs with four tabs (Friends, Home, Inbox, Profile) that rearrange it instead of swapping screens. Shared energies slide out as colour bands and reach for each other; similar rims shimmer where they cross. See [docs/ORBIT.md](docs/ORBIT.md).
-- **Essence**: your light, every realm editable, and a resonator panel for feeling each meeting pattern. Opened from Profile.
+- **Orbit**: after Attune the app is one persistent field of gooey orbs with four tabs (Friends, Home, Inbox, Profile) that rearrange it instead of swapping screens. Shared energies slide out as colour bands and reach for each other; similar rims shimmer where they cross. See [docs/UI.md](docs/UI.md).
+- **Essence**: your light, every realm editable, and a resonator panel for feeling each meeting pattern. Opened from Profile with Retune your light.
 
 ## Hardware path
 All haptics are written as a platform-neutral `VibrationScore` (`Starfall/Hardware/Resonator.swift`). The iPhone plays them through Core Haptics. A future Starfall pebble receives the same score as bytes over BLE. See [docs/HARDWARE.md](docs/HARDWARE.md).

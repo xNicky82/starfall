@@ -45,6 +45,15 @@ enum SoulFactory {
         for p in Catalog.traits {
             s.traits[p.id] = (Double.random(in: -1...1, using: &rng) * 4).rounded() / 4
         }
+        // One or two specifics inside each interest, plus a stated watch/play now and then.
+        for id in s.interests.keys.sorted() {
+            if let opts = Catalog.specifics[id] {
+                for n in opts.shuffled(using: &rng).prefix(Int.random(in: 1...2, using: &rng)) { s.toggleSpecific(id, n) }
+            }
+            if Catalog.engagement[id] != nil, Int.random(in: 0..<3, using: &rng) == 0 {
+                s.setEngagement(id, Engagement.allCases.randomElement(using: &rng))
+            }
+        }
         return s
     }
 }

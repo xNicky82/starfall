@@ -27,6 +27,11 @@ struct Resonance: Hashable {
     var meeting: Meeting
     var sharedValues: [String]
     var sharedInterests: [String]
+    /// Specifics you both picked inside a shared interest: (interest id, specific name).
+    var sharedSpecifics: [(interest: String, name: String)] = []
+
+    static func == (a: Resonance, b: Resonance) -> Bool { a.score == b.score && a.sharedInterests == b.sharedInterests }
+    func hash(into h: inout Hasher) { h.combine(score); h.combine(sharedInterests) }
 
     static let weights = (values: 0.5, interests: 0.3, traits: 0.2)
 
@@ -45,7 +50,13 @@ struct Resonance: Hashable {
             if let wb = b.interests[id] { shared += min(wa, wb); sharedInterests.append((id, wa + wb)) }
         }
         let ia = a.interests.values.reduce(0, +), ib = b.interests.values.reduce(0, +)
-        let interests = min(1, shared / max(1, min(ia, ib)))
+        // Loving the same specific thing (both into Hockey, not just Sport) pulls a little harder.
+        var specifics: [(interest: String, name: String)] = []
+        for (id, _) in sharedInterests {
+            let mine = Set(a.specifics(id))
+            for n in b.specifics(id) where mine.contains(n) { specifics.append((id, n)) }
+        }
+        let interests = min(1, shared / max(1, min(ia, ib)) + min(0.25, 0.08 * Double(specifics.count)))
 
         // Traits: harmonic axes mend when close; complementary axes mend with a little distance.
         var t = 0.0
@@ -77,6 +88,7 @@ struct Resonance: Hashable {
 
         return Resonance(score: score, values: values, interests: interests, traits: traits,
                          meeting: meeting, sharedValues: sharedValues,
-                         sharedInterests: sharedInterests.sorted { $0.1 > $1.1 }.map(\.0))
+                         sharedInterests: sharedInterests.sorted { $0.1 > $1.1 }.map(\.0),
+                         sharedSpecifics: specifics)
     }
 }

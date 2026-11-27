@@ -14,6 +14,27 @@ struct Soul: Codable, Identifiable, Hashable {
     /// trait id → position, -1 (left pole) … +1 (right pole)
     var traits: [String: Double] = [:]
     var bornAt: Date = Date()
+    /// interest id → the specific things you love inside it (Sport → Hockey). Optional so older saves still load.
+    var picks: [String: [String]]?
+    /// interest id → watch / play / both, when you have said so. Otherwise it is assumed from Observe ↔ Partake.
+    var modes: [String: Engagement]?
+    /// Age, sex, location, education. Optional so older saves still load.
+    var basics: Basics?
+}
+
+struct Basics: Codable, Hashable {
+    var age: Int?
+    var sex: String?
+    var location: String?
+    var education: String?
+
+    static let sexes = ["Woman", "Man", "Non-binary", "Prefer not to say"]
+    static let educations = ["High school", "College", "Trade", "Bachelor's", "Master's", "Doctorate", "Self-taught"]
+
+    /// One readable line, e.g. "25 · Man · Toronto · Bachelor's".
+    var line: String {
+        [age.map { String($0) }, sex, location, education].compactMap { $0 }.filter { !$0.isEmpty }.joined(separator: " · ")
+    }
 }
 
 // MARK: - The Bank
@@ -47,6 +68,7 @@ extension Soul {
     mutating func toggleInterest(_ id: String) {
         if interests[id] != nil {
             interests[id] = nil; ascended.remove(id)
+            picks?[id] = nil; modes?[id] = nil
         } else {
             interests[id] = min(6, remaining)
         }
@@ -88,19 +110,69 @@ extension Soul {
     }
     func trait(_ id: String) -> Double { traits[id] ?? 0 }
 
+    // MARK: Specifics and engagement
+
+    func specifics(_ id: String) -> [String] { picks?[id] ?? [] }
+    mutating func toggleSpecific(_ id: String, _ name: String) {
+        var p = picks ?? [:]
+        var list = p[id] ?? []
+        if let i = list.firstIndex(of: name) { list.remove(at: i) } else { list.append(name) }
+        p[id] = list.isEmpty ? nil : list
+        picks = p
+    }
+    /// Watch, play or both. Until you say otherwise it is assumed from where you sit on Observe ↔ Partake,
+    /// so a full observer who loves Sport → Hockey is assumed to watch it.
+    func engagement(_ id: String) -> (mode: Engagement, assumed: Bool) {
+        if let m = modes?[id] { return (m, false) }
+        let t = trait("stance")
+        return (t < -0.33 ? .watch : t > 0.33 ? .play : .both, true)
+    }
+    mutating func setEngagement(_ id: String, _ m: Engagement?) {
+        var d = modes ?? [:]
+        d[id] = m
+        modes = d
+    }
+
     // MARK: Aura
 
-    /// How much of each element this soul is made of (sums to 1).
-    var elements: [Element: Double] {
+    /// Your nature as colour: each spectrum's poles belong to energies, weighted by where you sit. Sums to 1.
+    var nature: [Element: Double] {
+        var e: [Element: Double] = [:]
+        for p in Catalog.traits {
+            let t = trait(p.id)
+            e[p.leftEnergy, default: 0] += pow((1 - t) / 2, 2)
+            e[p.rightEnergy, default: 0] += pow((1 + t) / 2, 2)
+        }
+        let total = e.values.reduce(0, +)
+        guard total > 0 else { return [.tide: 1] }
+        return e.mapValues { $0 / total }
+    }
+    /// Where your light goes: interests and values, by energy. Sums to 1, or empty when nothing is spent.
+    var light: [Element: Double] {
         var e: [Element: Double] = [:]
         for (id, w) in interests where !ascended.contains(id) {
             if let f = Catalog.facet(id) { e[f.element, default: 0] += w * (1 - Soul.undercurrent) }
         }
         for (id, w) in effectiveValues { if let f = Catalog.facet(id) { e[f.element, default: 0] += w } }
         let total = e.values.reduce(0, +)
+        guard total > 0 else { return [:] }
+        return e.mapValues { $0 / total }
+    }
+    /// How much of each energy this soul shows (sums to 1).
+    /// Nature picks the colours; your interests and how much you love them decide how strongly each takes hold.
+    var elements: [Element: Double] {
+        let n = nature, l = light
+        var e: [Element: Double] = [:]
+        for el in Element.allCases {
+            let hold = l.isEmpty ? 1 : 0.3 + 0.7 * min(1, (l[el] ?? 0) * 2.5)
+            e[el] = (n[el] ?? 0) * hold
+        }
+        let total = e.values.reduce(0, +)
         guard total > 0 else { return [.tide: 1] }
         return e.mapValues { $0 / total }
     }
+    /// 0…1: how much light you spend on interests, so how far your colour bands can reach.
+    var hold: Double { min(1, interests.values.reduce(0, +) / 60) }
     /// Dominant energies, strongest first.
     var aura: [(Element, Double)] { elements.sorted { $0.value > $1.value }.filter { $0.value > 0.04 } }
     var auraColors: [Color] {

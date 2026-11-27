@@ -11,17 +11,18 @@
 		0E9D3CA62A406729469325E1 /* EssenceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD70BFB50CD02F617EC56D1 /* EssenceView.swift */; };
 		1C87A453CB4BCFBB5A6464A2 /* EncounterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5744E42528252DF8CC6070DD /* EncounterView.swift */; };
 		2D2340B92233576C0CCB2FAC /* SoulFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = B461012E64B0D444CE58F589 /* SoulFactory.swift */; };
-		46C3ABB8926FC14873DC9922 /* Sliders.swift in Sources */ = {isa = PBXBuildFile; fileRef = C563DC6D16CFC720CA59DC8B /* Sliders.swift */; };
 		471B55D2843F16E717025393 /* Resonator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCBB81CA0B72256D4359CDEA /* Resonator.swift */; };
+		583B605CEAABDDB366433E68 /* Celestial.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0962C6CF5C0644ACD527AE4 /* Celestial.swift */; };
+		5B162333DB73FCEE62956A12 /* Instruments.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A40C4561B82D740A4B47390 /* Instruments.swift */; };
 		5C3866AB4CCC09A566D90BBF /* Soul.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2BE3B5705A016E3B267FEBD /* Soul.swift */; };
 		6B004E227C40B3933F3B0E1C /* DriftView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8656967609056B0663FFC0 /* DriftView.swift */; };
 		78A226287B51D5BF8385B1A1 /* Resonance.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8D6B348690874712D060393 /* Resonance.swift */; };
 		7EB1D296F75ADD50D12D8D38 /* StarfallApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB50F5921840318C8950CFBA /* StarfallApp.swift */; };
-		889DEE69D5BB8F4B7A26E1C8 /* Orb.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6614ECF629A1D2C6123F082 /* Orb.swift */; };
+		8C26BBD04D8E0661292FE88E /* Stipple.metal in Sources */ = {isa = PBXBuildFile; fileRef = D7FA96F386F5BB8BC8091211 /* Stipple.metal */; };
 		9F9B9AEE4EF879DA2D7D52DA /* BankTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20AF721E24D3A927743336C /* BankTests.swift */; };
 		A96D08982D988A373861D7DD /* Catalog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12AC1CE80BEE86A6FD0F081F /* Catalog.swift */; };
-		BD7ED63BCA3EE1AE889E9A53 /* RealmEditors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 109B43052890B6764C493240 /* RealmEditors.swift */; };
 		C5B62F6A047A720BF5C05E36 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8036A51877B13F1869A0C68B /* Theme.swift */; };
+		C98789E1B55EC922887D93EE /* Gate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95540FC49FA9CB736B79C041 /* Gate.swift */; };
 		D04E33C9E8B790C7913005F1 /* ConstellationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D76FAB599A0259AA6C525379 /* ConstellationView.swift */; };
 		E41D332F51191E6D4C5B4ABC /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35693FB4E2E89B755F7645F /* Store.swift */; };
 		E623B612A9821EEB30D5B7E1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4CF478DE5984DAC834354CC5 /* Assets.xcassets */; };
@@ -38,23 +39,24 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		109B43052890B6764C493240 /* RealmEditors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmEditors.swift; sourceTree = "<group>"; };
 		12AC1CE80BEE86A6FD0F081F /* Catalog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Catalog.swift; sourceTree = "<group>"; };
 		4CF478DE5984DAC834354CC5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5744E42528252DF8CC6070DD /* EncounterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncounterView.swift; sourceTree = "<group>"; };
+		5A40C4561B82D740A4B47390 /* Instruments.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Instruments.swift; sourceTree = "<group>"; };
 		7BC95E4BCF0E39AE14DA5D74 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		8036A51877B13F1869A0C68B /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
+		95540FC49FA9CB736B79C041 /* Gate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gate.swift; sourceTree = "<group>"; };
 		A2BE3B5705A016E3B267FEBD /* Soul.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Soul.swift; sourceTree = "<group>"; };
-		A6614ECF629A1D2C6123F082 /* Orb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Orb.swift; sourceTree = "<group>"; };
 		A8D6B348690874712D060393 /* Resonance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resonance.swift; sourceTree = "<group>"; };
 		B20AF721E24D3A927743336C /* BankTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankTests.swift; sourceTree = "<group>"; };
 		B2ED7A8A1E4A1F78F3694D9B /* StarfallTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = StarfallTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B35693FB4E2E89B755F7645F /* Store.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
 		B461012E64B0D444CE58F589 /* SoulFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoulFactory.swift; sourceTree = "<group>"; };
-		C563DC6D16CFC720CA59DC8B /* Sliders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sliders.swift; sourceTree = "<group>"; };
 		D76FAB599A0259AA6C525379 /* ConstellationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstellationView.swift; sourceTree = "<group>"; };
+		D7FA96F386F5BB8BC8091211 /* Stipple.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Stipple.metal; sourceTree = "<group>"; };
 		DAD70BFB50CD02F617EC56D1 /* EssenceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EssenceView.swift; sourceTree = "<group>"; };
 		DCBB81CA0B72256D4359CDEA /* Resonator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resonator.swift; sourceTree = "<group>"; };
+		E0962C6CF5C0644ACD527AE4 /* Celestial.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Celestial.swift; sourceTree = "<group>"; };
 		E4E563F950B2C5F273517C51 /* AttuneFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttuneFlow.swift; sourceTree = "<group>"; };
 		EA8656967609056B0663FFC0 /* DriftView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriftView.swift; sourceTree = "<group>"; };
 		EB50F5921840318C8950CFBA /* StarfallApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarfallApp.swift; sourceTree = "<group>"; };
@@ -120,9 +122,9 @@
 		5F97CF859FB6BB7B4D5D7059 /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				A6614ECF629A1D2C6123F082 /* Orb.swift */,
-				109B43052890B6764C493240 /* RealmEditors.swift */,
-				C563DC6D16CFC720CA59DC8B /* Sliders.swift */,
+				E0962C6CF5C0644ACD527AE4 /* Celestial.swift */,
+				95540FC49FA9CB736B79C041 /* Gate.swift */,
+				5A40C4561B82D740A4B47390 /* Instruments.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -130,6 +132,7 @@
 		9FA16932D19EA8732B174086 /* Theme */ = {
 			isa = PBXGroup;
 			children = (
+				D7FA96F386F5BB8BC8091211 /* Stipple.metal */,
 				8036A51877B13F1869A0C68B /* Theme.swift */,
 			);
 			path = Theme;
@@ -289,18 +292,19 @@
 			files = (
 				08F9BE616A021325639946CE /* AttuneFlow.swift in Sources */,
 				A96D08982D988A373861D7DD /* Catalog.swift in Sources */,
+				583B605CEAABDDB366433E68 /* Celestial.swift in Sources */,
 				D04E33C9E8B790C7913005F1 /* ConstellationView.swift in Sources */,
 				6B004E227C40B3933F3B0E1C /* DriftView.swift in Sources */,
 				1C87A453CB4BCFBB5A6464A2 /* EncounterView.swift in Sources */,
 				0E9D3CA62A406729469325E1 /* EssenceView.swift in Sources */,
-				889DEE69D5BB8F4B7A26E1C8 /* Orb.swift in Sources */,
-				BD7ED63BCA3EE1AE889E9A53 /* RealmEditors.swift in Sources */,
+				C98789E1B55EC922887D93EE /* Gate.swift in Sources */,
+				5B162333DB73FCEE62956A12 /* Instruments.swift in Sources */,
 				78A226287B51D5BF8385B1A1 /* Resonance.swift in Sources */,
 				471B55D2843F16E717025393 /* Resonator.swift in Sources */,
-				46C3ABB8926FC14873DC9922 /* Sliders.swift in Sources */,
 				5C3866AB4CCC09A566D90BBF /* Soul.swift in Sources */,
 				2D2340B92233576C0CCB2FAC /* SoulFactory.swift in Sources */,
 				7EB1D296F75ADD50D12D8D38 /* StarfallApp.swift in Sources */,
+				8C26BBD04D8E0661292FE88E /* Stipple.metal in Sources */,
 				E41D332F51191E6D4C5B4ABC /* Store.swift in Sources */,
 				C5B62F6A047A720BF5C05E36 /* Theme.swift in Sources */,
 			);

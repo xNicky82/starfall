@@ -7,18 +7,20 @@ struct StarfallApp: App {
         WindowGroup {
             RootView()
                 .environment(store)
-                .preferredColorScheme(.light)
+                .preferredColorScheme(.dark)
                 .tint(SF.blue)
+                .background(Color.black)
         }
     }
 }
 
 struct RootView: View {
     @Environment(Store.self) private var store
-    @State private var tab = UserDefaults.standard.integer(forKey: "tab") // launch arg `-tab N` for previews
+    @State private var tab = UserDefaults.standard.integer(forKey: "tab") // launch arg `-tab N`
 
     var body: some View {
-        Group {
+        ZStack {
+            Color.black.ignoresSafeArea()
             if store.me == nil {
                 AttuneFlow().transition(.opacity)
             } else {
@@ -33,64 +35,51 @@ struct RootView: View {
                     .transition(.opacity)
                     if !store.inEncounter {
                         OrbitBar(selection: $tab, me: store.me)
-                            .padding(.bottom, 8)
-                            .transition(.move(edge: .bottom).combined(with: .opacity))
+                            .transition(.opacity)
                     }
                 }
                 .transition(.opacity)
             }
         }
-        .animation(.easeInOut(duration: 0.6), value: store.me == nil)
+        .animation(.easeInOut(duration: 0.8), value: store.me == nil)
     }
 }
 
-/// Navigation as three circles.
+/// Three circles. No words.
 struct OrbitBar: View {
     @Binding var selection: Int
     var me: Soul?
 
     var body: some View {
-        HStack(spacing: 34) {
-            item(0, "Drift") {
+        HStack(spacing: 56) {
+            item(0) { Circle().stroke(SF.paper, lineWidth: 1).frame(width: 14, height: 14) }
+            item(1) { PlanetGlyph(colors: me?.auraColors ?? [SF.blue], radius: 6, spread: 0.8) }
+            item(2) {
                 ZStack {
-                    Circle().stroke(SF.ink.opacity(0.5), lineWidth: 1).frame(width: 22, height: 22)
-                    Circle().fill(SF.ink.opacity(0.6)).frame(width: 6, height: 6).offset(x: 11)
-                }
-            }
-            item(1, "Essence") {
-                OrbView(colors: me?.auraColors ?? [SF.blue]).frame(width: 64, height: 64)
-            }
-            item(2, "Bonds") {
-                ZStack {
-                    ForEach(0..<3) { i in
-                        Circle().fill(SF.ink.opacity(0.6)).frame(width: 5, height: 5)
-                            .offset(x: CGFloat([-8, 7, 2][i]), y: CGFloat([5, 6, -8][i]))
+                    ForEach(0..<3, id: \.self) { i in
+                        Circle().fill(SF.paper).frame(width: 3, height: 3)
+                            .offset(x: CGFloat([-7, 6, 1][i]), y: CGFloat([4, 5, -7][i]))
                     }
                 }
             }
         }
-        .padding(.horizontal, 26).padding(.vertical, 10)
-        .background(Capsule().fill(.ultraThinMaterial))
-        .overlay(Capsule().stroke(Color.white.opacity(0.6), lineWidth: 1))
-        .shadow(color: SF.ink.opacity(0.08), radius: 18, y: 6)
+        .padding(.top, 18)
+        .padding(.bottom, 4)
+        .frame(maxWidth: .infinity)
+        .background(LinearGradient(colors: [.clear, .black.opacity(0.9)], startPoint: .top, endPoint: .bottom)
+            .ignoresSafeArea())
     }
 
-    private func item<C: View>(_ i: Int, _ name: String, @ViewBuilder _ icon: () -> C) -> some View {
+    private func item<C: View>(_ i: Int, @ViewBuilder _ icon: () -> C) -> some View {
         let on = selection == i
-        return VStack(spacing: 5) {
-            ZStack {
-                Circle().fill(on ? Color.white : Color.clear).frame(width: 48, height: 48)
-                    .shadow(color: on ? SF.blue.opacity(0.3) : .clear, radius: 10)
-                icon().frame(width: 28, height: 28)
+        return icon()
+            .frame(width: 44, height: 44)
+            .opacity(on ? 1 : 0.38)
+            .contentShape(Circle())
+            .onTapGesture {
+                guard !on else { return }
+                Resonator.shared.play(.snap)
+                withAnimation(.easeInOut(duration: 0.45)) { selection = i }
             }
-            .frame(width: 48, height: 48)
-            Text(name).font(SF.label(9)).tracking(2).textCase(.uppercase).foregroundStyle(on ? SF.ink : SF.mist)
-        }
-        .contentShape(Circle())
-        .onTapGesture {
-            guard !on else { return }
-            Resonator.shared.play(.snap)
-            withAnimation(.easeInOut(duration: 0.35)) { selection = i }
-        }
     }
 }

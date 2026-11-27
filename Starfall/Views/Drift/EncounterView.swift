@@ -1,6 +1,7 @@
 import SwiftUI
 
-/// Two lights have touched. Feel it, read it, then slide: drift on, or bond.
+/// Their world rises; your star hangs above it.
+/// Pull your star down into their horizon to bond. Throw it back up to drift on.
 struct EncounterView: View {
     var me: Soul
     var other: Soul
@@ -8,145 +9,134 @@ struct EncounterView: View {
     var onChoice: (BondRecord.Choice) -> Void
 
     @State private var appeared = Date()
-
-    private var tint: Color {
-        switch res.meeting { case .mend: return SF.blue; case .spark: return Element.sol.color; case .clash: return Element.ember.color }
-    }
+    @State private var drag: Double? = nil
+    @State private var releaseFrom: Double = 0
+    @State private var releaseAt = Date.distantPast
+    @State private var decision: BondRecord.Choice? = nil
+    @State private var decidedAt = Date.distantPast
+    @State private var lastTick = 0
+    @State private var textIn = 0.0
 
     var body: some View {
-        ZStack {
-            SF.paper.opacity(0.92).ignoresSafeArea()
-            SanctuaryBackground(glow: tint).opacity(0.9)
-            ScrollView(showsIndicators: false) {
-                VStack(spacing: 18) {
-                    Text("Collision").eyebrow(tint).padding(.top, 20)
-                    collisionCanvas.frame(height: 250)
-                    Text(res.meeting.word).font(SF.display(44)).tracking(14).foregroundStyle(SF.ink)
-                    Text(res.meeting.line).font(SF.body(15)).foregroundStyle(SF.mist)
-                    Text("with \(other.name)").font(SF.display(18)).foregroundStyle(SF.ink).padding(.top, 2)
-
-                    VStack(spacing: 14) {
-                        HStack {
-                            Text("Resonance").eyebrow()
-                            Spacer()
-                            Text("\(Int((res.score * 100).rounded()))").font(SF.display(28)).monospacedDigit().foregroundStyle(SF.ink)
-                        }
-                        meter("Values", res.values, .aether)
-                        meter("Interests", res.interests, .sol)
-                        meter("Traits", res.traits, .tide)
+        GeometryReader { g in
+            let w = g.size.width, h = g.size.height
+            let R = w * 0.56, horizon = h * 0.56, gap = w * 0.22, trail = w * 0.26
+            ZStack {
+                TimelineView(.animation) { tl in
+                    Canvas { ctx, size in
+                        ctx.fill(Path(CGRect(origin: .zero, size: size)), with: .color(.black))
+                        draw(&ctx, now: tl.date, w: w, h: h, R: R, horizon: horizon, gap: gap, trail: trail)
                     }
-                    .padding(18)
-                    .background(RoundedRectangle(cornerRadius: 24).fill(SF.card))
-
-                    if !res.sharedValues.isEmpty || !res.sharedInterests.isEmpty {
-                        VStack(alignment: .leading, spacing: 12) {
-                            Text("Where you meet").eyebrow()
-                            chips(res.sharedValues.prefix(4).compactMap(Catalog.facet), filled: true)
-                            chips(res.sharedInterests.prefix(6).compactMap(Catalog.facet), filled: false)
-                        }
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .padding(18)
-                        .background(RoundedRectangle(cornerRadius: 24).fill(SF.card))
-                    }
-
-                    VStack(alignment: .leading, spacing: 12) {
-                        Text("\(other.name) holds").eyebrow()
-                        FlowRow(items: Array(other.topValues.prefix(4)))
-                        ElementBar(soul: other).padding(.top, 4)
-                    }
-                    .padding(18)
-                    .background(RoundedRectangle(cornerRadius: 24).fill(SF.card))
-
-                    Color.clear.frame(height: 110)
                 }
-                .padding(.horizontal, 22)
-            }
-            VStack(spacing: 0) {
-                Spacer()
-                LinearGradient(colors: [SF.paper.opacity(0), SF.paper], startPoint: .top, endPoint: .bottom)
-                    .frame(height: 40).allowsHitTesting(false)
-                DualSlotSlider(leftLabel: "drift on", rightLabel: "bond", colors: me.auraColors, rightTint: tint,
-                               onLeft: { onChoice(.released) },
-                               onRight: { Resonator.shared.play(.mend); onChoice(.bonded) })
-                    .padding(.horizontal, 22).padding(.bottom, 18)
-                    .background(SF.paper.ignoresSafeArea(edges: .bottom))
+                .stipple(specks: 0.0035)
+                .contentShape(Rectangle())
+                .gesture(DragGesture(minimumDistance: 0)
+                    .onChanged { v in
+                        guard decision == nil else { return }
+                        let p = min(max(Double(v.translation.height / gap), -1), 1)
+                        let tick = Int(p * 8)
+                        if tick != lastTick { lastTick = tick; Resonator.shared.tick() }
+                        drag = p
+                    }
+                    .onEnded { _ in
+                        guard let p = drag else { return }
+                        drag = nil
+                        if p > 0.82 { decide(.bonded) }
+                        else if p < -0.6 { decide(.released) }
+                        else { releaseFrom = p; releaseAt = .now }
+                    })
+
+                VStack(spacing: 10) {
+                    Text(other.name).caption(15, SF.paper)
+                    Text(res.meeting.rawValue).caption(9, SF.mist)
+                    if !res.sharedValues.isEmpty {
+                        Text(res.sharedValues.prefix(3).compactMap { Catalog.facet($0)?.name }.joined(separator: "  ·  "))
+                            .caption(8.5, SF.mist)
+                    }
+                }
+                .opacity(textIn * (decision == nil ? 1 : 0))
+                .position(x: w / 2, y: horizon + R * 0.42)
+                .allowsHitTesting(false)
             }
         }
+        .ignoresSafeArea()
+        .onAppear { withAnimation(.easeIn(duration: 1.0).delay(1.0)) { textIn = 1 } }
     }
 
-    private var collisionCanvas: some View {
-        TimelineView(.animation) { tl in
-            Canvas { ctx, size in
-                let t = tl.date.timeIntervalSinceReferenceDate
-                let age = t - appeared.timeIntervalSinceReferenceDate
-                let c = CGPoint(x: size.width / 2, y: size.height / 2)
-                let r: CGFloat = 52
-                let settle = min(1, age / 1.2)
-                var sep: CGFloat
-                var jitter: CGFloat = 0
-                switch res.meeting {
-                case .mend:  sep = r * (2.4 - 1.5 * settle) + 6 * sin(t * 1.1)
-                case .spark: sep = r * (2.4 - 0.7 * settle) + 4 * sin(t * 3.7); jitter = 1.5
-                case .clash: sep = r * (2.0 + 0.6 * settle); jitter = CGFloat(4 * max(0, 1 - age / 1.5))
-                }
-                let jx = jitter * CGFloat(sin(t * 53)), jy = jitter * CGFloat(cos(t * 47))
-                let a = CGPoint(x: c.x - sep / 2 + jx, y: c.y + jy), b = CGPoint(x: c.x + sep / 2 - jx, y: c.y - jy)
-
-                if res.meeting == .mend {
-                    // a shared light where they overlap
-                    let mr = r * 1.6
-                    ctx.fill(Path(ellipseIn: CGRect(x: c.x - mr, y: c.y - mr, width: mr * 2, height: mr * 2)),
-                             with: .radialGradient(Gradient(colors: [Color.white.opacity(0.8 * settle), .clear]),
-                                                   center: c, startRadius: 0, endRadius: mr))
-                }
-                if res.meeting == .spark {
-                    for k in 0..<7 {
-                        let ang = Double(k) * 0.9 + t * 2.3
-                        let len = 10 + 14 * abs(sin(t * 5 + Double(k)))
-                        var p = Path(); p.move(to: c)
-                        p.addLine(to: CGPoint(x: c.x + cos(ang) * len, y: c.y + sin(ang) * len))
-                        ctx.stroke(p, with: .color(Element.sol.color.opacity(0.8)), lineWidth: 1.2)
-                    }
-                }
-                OrbRenderer.draw(&ctx, at: a, radius: r, colors: other.auraColors, time: t, phase: 3)
-                var top = ctx
-                if res.meeting == .mend { top.opacity = 0.85 }
-                OrbRenderer.draw(&top, at: b, radius: r, colors: me.auraColors, time: t)
-                if res.meeting == .clash {
-                    var p = Path(); p.move(to: CGPoint(x: c.x, y: c.y - r)); p.addLine(to: CGPoint(x: c.x, y: c.y + r))
-                    ctx.stroke(p, with: .color(Element.ember.color.opacity(0.6)), lineWidth: 1.5)
-                }
-            }
+    private func decide(_ c: BondRecord.Choice) {
+        decision = c
+        decidedAt = .now
+        if c == .bonded {
+            Resonator.shared.play(.snap)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) { Resonator.shared.play(.mend) }
+        } else {
+            Resonator.shared.play(.tick)
         }
+        DispatchQueue.main.asyncAfter(deadline: .now() + (c == .bonded ? 1.3 : 0.8)) { onChoice(c) }
     }
 
-    private func meter(_ name: String, _ v: Double, _ el: Element) -> some View {
-        HStack(spacing: 12) {
-            Text(name).font(SF.label(12)).foregroundStyle(SF.mist).frame(width: 70, alignment: .leading)
-            GeometryReader { g in
-                ZStack(alignment: .leading) {
-                    Capsule().fill(SF.faint)
-                    Capsule().fill(el.color).frame(width: g.size.width * min(1, max(0.02, v)))
-                }
-            }
-            .frame(height: 6)
-            Text("\(Int((v * 100).rounded()))").font(SF.label(12)).monospacedDigit().foregroundStyle(SF.mist).frame(width: 28, alignment: .trailing)
-        }
-    }
+    private func rnd(_ n: Double) -> Double { let x = sin(n * 12.9898) * 43758.5453; return x - floor(x) }
 
-    private func chips(_ facets: [Facet], filled: Bool) -> some View {
-        ScrollView(.horizontal, showsIndicators: false) {
-            HStack(spacing: 8) {
-                ForEach(facets) { f in
-                    HStack(spacing: 6) {
-                        if filled { Circle().fill(.white.opacity(0.9)).frame(width: 6, height: 6) }
-                        else { Glyph(element: f.element, size: 8) }
-                        Text(f.name).font(SF.label(12)).foregroundStyle(filled ? .white : SF.ink)
-                    }
-                    .padding(.horizontal, 12).padding(.vertical, 8)
-                    .background(Capsule().fill(filled ? f.element.color : Color.white.opacity(0.6)))
-                }
+    private func draw(_ ctx: inout GraphicsContext, now: Date, w: CGFloat, h: CGFloat, R: CGFloat,
+                      horizon: CGFloat, gap: CGFloat, trail: CGFloat) {
+        let t = now.timeIntervalSinceReferenceDate
+        let age = now.timeIntervalSince(appeared)
+        let rise = ease(age / 1.4)
+        let c = CGPoint(x: w / 2, y: horizon + R + CGFloat(1 - rise) * h * 0.6)
+
+        var pull: Double
+        if let d = drag { pull = d } else {
+            let dt = now.timeIntervalSince(releaseAt)
+            pull = dt > 2 ? 0 : releaseFrom * exp(-dt * 6) * cos(dt * 9)
+        }
+        let entry = ease((age - 0.7) / 1.1)
+        var alpha = 1.0, flash = 0.0, plunge = 0.0, fly = 0.0
+        if let d = decision {
+            let dt = now.timeIntervalSince(decidedAt)
+            if d == .bonded {
+                pull = 1; plunge = min(1, dt / 0.22); alpha = max(0, 1 - dt / 0.22)
+                flash = dt < 0.22 ? 0 : exp(-(dt - 0.22) * 2.2)
+            } else {
+                fly = dt; alpha = max(0, 1 - dt / 0.7)
             }
         }
+
+        var colors = other.auraColors
+        var intensity = 1.0 + 0.05 * sin(t * 1.2)
+        var light = -Double.pi / 2
+        switch res.meeting {
+        case .mend:
+            colors = Array(other.auraColors.prefix(2)) + [me.auraColors[0]]
+            intensity += 0.3 * max(0, pull)
+        case .spark:
+            intensity += 0.22 * (0.5 + 0.5 * sin(t * 11) * sin(t * 3.7))
+        case .clash:
+            light += 0.25 * sin(t * 17) * max(0.25, 1 - age / 2)
+            intensity = 0.75 + 0.3 * abs(sin(t * 7.3))
+            colors = [other.auraColors[0], Element.ember.color]
+        }
+        Celestial.planet(&ctx, center: c, radius: R, colors: colors, intensity: intensity + flash, light: light,
+                         spread: 1.25 + 0.3 * CGFloat(flash))
+
+        if res.meeting == .spark && rise > 0.9 {
+            for k in 0..<6 {
+                let slot = floor(t * 7) + Double(k) * 13
+                let a = -Double.pi / 2 + (rnd(slot) - 0.5) * 1.9
+                let rr = R * CGFloat(1.0 + 0.05 * rnd(slot + 3))
+                let p = CGPoint(x: c.x + CGFloat(cos(a)) * rr, y: c.y + CGFloat(sin(a)) * rr)
+                Celestial.star(&ctx, at: p, radius: 4 + 6 * CGFloat(rnd(slot + 7)), color: Element.sol.color, intensity: 0.9)
+            }
+        }
+
+        guard entry > 0, alpha > 0 else { return }
+        let rest = horizon - gap
+        let bob = 3 * sin(t * 1.4) * (1 - abs(pull))
+        var y = rest - CGFloat(1 - entry) * (rest + trail + 60)
+        y += pull > 0 ? (gap - 4) * CGFloat(pull) : gap * 0.9 * CGFloat(pull)
+        y += CGFloat(bob) + CGFloat(plunge) * 26 - CGFloat(fly * fly) * 1400
+        let x = w / 2 + (res.meeting == .clash ? CGFloat(1.5 * sin(t * 53)) : 0)
+        Celestial.comet(&ctx, head: CGPoint(x: x, y: y), angle: fly > 0 ? .pi / 2 : -.pi / 2,
+                        length: trail * CGFloat(1 + 0.5 * abs(pull) + 1.2 * (1 - entry)) + CGFloat(fly) * 300,
+                        intensity: alpha, headColor: me.hue, head: 1.6)
     }
 }

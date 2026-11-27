@@ -81,7 +81,7 @@ extension Soul {
         interests.compactMap { id, w in
             guard !ascended.contains(id), let f = Catalog.facet(id) else { return nil }
             return (f, w)
-        }.sorted { $0.1 > $1.1 }
+        }.sorted { $0.0.name < $1.0.name }
     }
     var topValues: [(Facet, Double)] {
         Catalog.values.map { ($0, effectiveValue($0.id)) }.filter { $0.1 > 0.5 }.sorted { $0.1 > $1.1 }

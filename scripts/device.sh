@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+export DEVELOPER_DIR="${DEVELOPER_DIR:-/Applications/Xcode.app/Contents/Developer}"
 # Build Starfall and install + launch it on the USB-connected iPhone.
 set -euo pipefail
 cd "$(dirname "$0")/.."

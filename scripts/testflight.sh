@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+export DEVELOPER_DIR="${DEVELOPER_DIR:-/Applications/Xcode.app/Contents/Developer}"
 # Archive Starfall and upload it to TestFlight.
 # Requires an active Apple Developer Program team + an App Store Connect API key:
 #   ASC_KEY_ID, ASC_ISSUER_ID, ASC_KEY_PATH (path to AuthKey_XXXX.p8), TEAM_ID

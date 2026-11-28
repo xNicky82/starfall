@@ -1,6 +1,6 @@
 # Starfall UI: Orbit
 
-After Attune, Starfall is one persistent field of orbs with four tabs that only rearrange it. Nothing navigates: your orb never leaves the screen, other orbs glide to new positions and a thin layer of UI fades in over them.
+Starfall is one persistent field of orbs. Onboarding happens inside it, then four tabs rearrange it. Nothing navigates: your orb never leaves the screen, other orbs glide to new positions and a thin layer of UI fades in over them.
 
 ## The field
 
@@ -11,6 +11,10 @@ After Attune, Starfall is one persistent field of orbs with four tabs that only 
 - When your orb first truly touches another, the phone plays that pair's meeting score (mend, spark or clash).
 
 Resonance comes straight from `Resonance.between`. The physics uses `sim = clamp((score - 0.2) / 0.45)`.
+
+## Onboarding
+
+Your orb sits alone at the top, enlarged, with its bands fanned upward, and it recolours live as you go: **Welcome** (name) → **Your nature** (the eleven spectrums) → **Interests** (pick at least two) → **Your light** (weigh them; the bank of 100 and ascension still apply) → **Values**. You move forward by sliding your orb into the dotted slot at the bottom (`SlideToEnter`). After the last step the tab bar slides in and you land on Home. Start over lives at the bottom of Details.
 
 ## Tabs
 
@@ -35,7 +39,8 @@ The tab bar is a floating Liquid Glass capsule (real `glassEffect` on iOS 26, a 
 | File | What it holds |
 |---|---|
 | `Starfall/Orbit/OrbEngine.swift` | Pure-Swift physics: orbs, pairs, bands, shimmer beads. No UI. |
-| `Starfall/Orbit/Orbit.swift` | The observable app model: tabs, scenes per tab, inbox, camera, display link, shader packing. |
+| `Starfall/Orbit/Orbit.swift` | The observable app model: tabs, onboarding mode, scenes per tab, inbox, camera, display link, shader packing. |
+| `Starfall/Orbit/AttuneLayer.swift` | Onboarding steps and the `SlideToEnter` control. |
 | `Starfall/Orbit/Orbit.metal` | `orbField` (the whole field in one pass) and `tabOrb` (the morphing bar orb). |
 | `Starfall/Orbit/OrbitRoot.swift` | Stage, field view, gestures, name pills, header, glass helper. |
 | `Starfall/Orbit/OrbitTabBar.swift` | The tab bar. |
@@ -51,6 +56,10 @@ New files need the project regenerated: run `xcodegen generate` (the device and 
 
 ## Still true from before
 
-- Attune stays the onboarding: slide-to-slot, the bank of light, ascension. Essence stays the editor, opened from Profile.
+- The bank of light, ascension and the slide-into-slot gesture carry over from the first version.
 - Haptics are `VibrationScore`s played through `Resonator`, so the pebble can receive the same scores later (see [HARDWARE.md](HARDWARE.md)).
-- Type is SF Pro (the system font) in Orbit; Attune and Essence keep their monospaced captions for now.
+- Type is SF Pro (the system font) everywhere.
+
+## Screenshots
+
+`scripts/shots.sh` builds, seeds a soul and screenshots every onboarding step (`-attuneStep N`) and every tab (`-orbitTab 0…3`) on the simulator.

@@ -78,7 +78,7 @@ final class FrameTicker: NSObject {
 @Observable
 final class Orbit {
     // MARK: UI state (observed)
-    var tab: OrbitTab = .home
+    var tab: OrbitTab = UserDefaults.standard.string(forKey: "orbitTab").flatMap(Int.init).flatMap(OrbitTab.init(rawValue:)) ?? .home // launch arg `-orbitTab 0..3`
     var sheet: OrbitSheet?
     var threadID: UUID?
     var threads: [OrbThread] = []
@@ -90,6 +90,8 @@ final class Orbit {
     var keyboard: CGFloat = 0
     /// Profile: the details sheet (photo, age, location...).
     var showDetails = false
+    /// Onboarding: your orb is made in the field, before any tab exists.
+    var attuning = false
 
     // MARK: Field (not observed; `frame` ticks instead)
     @ObservationIgnored let engine: OrbEngine
@@ -277,6 +279,7 @@ final class Orbit {
         guard size != .zero, let you = engine.get(me.id) else { return }
         you.forceBand = nil; you.pin = nil; you.tr = Orbit.radius(of: me, isMe: true)
         engine.gather = 0.05
+        if attuning { pinProfile(you); return }
         switch tab {
         case .home:
             targetZoom = 1; setFieldRegion(1)
@@ -289,18 +292,33 @@ final class Orbit {
             targetZoom = 1
             pinInbox()
         case .profile:
-            targetZoom = 1
-            scene([])
-            let rPx = min(86, Orbit.radius(of: me, isMe: true) * 1.35 * U)
-            let cyPx = insets.top + 64 + rPx
-            you.tr = rPx / U
-            you.pin = SIMD2(0, toWorld(CGPoint(x: 0, y: cyPx), zoom: 1).y)
-            you.forceBand = SIMD2(0, -1)
+            pinProfile(you)
         }
     }
+    /// Your orb alone, enlarged at the top with every band fanned upward.
+    private func pinProfile(_ you: Orb) {
+        targetZoom = 1
+        scene([])
+        let rPx = min(86, Orbit.radius(of: me, isMe: true) * 1.35 * U)
+        let cyPx = orbTop + rPx
+        you.tr = rPx / U
+        you.pin = SIMD2(0, toWorld(CGPoint(x: 0, y: cyPx), zoom: 1).y)
+        you.forceBand = SIMD2(0, -1)
+    }
+    /// Onboarding finished: open the field on Home.
+    func finishAttune() {
+        store.attuned = true
+        attuning = false
+        tab = .home
+        Resonator.shared.play(.mend)
+        apply()
+    }
+    /// Top of your enlarged orb on Profile and during onboarding: clear of the header's title and subtitle,
+    /// leaving room for the bands that fan out above it.
+    var orbTop: CGFloat { insets.top + 110 }
     var profilePanelTop: CGFloat {
         let rPx = min(86, Orbit.radius(of: me, isMe: true) * 1.35 * U)
-        return insets.top + 64 + rPx * 2 + 26
+        return orbTop + rPx * 2 + 26
     }
 
     /// Inbox: each thread's people sit as an overlapping cluster in the row's avatar slot.
@@ -339,6 +357,7 @@ final class Orbit {
     // MARK: Interactions
 
     func tapOrb(_ o: Orb) {
+        if attuning { return }
         if o.anchor { if tab == .profile { showDetails = true } else { select(.profile) }; return }
         switch tab {
         case .home, .friends:

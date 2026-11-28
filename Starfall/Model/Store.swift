@@ -20,8 +20,12 @@ final class Store {
     /// Your profile photo after crop and edits.
     var photo: UIImage?
     var photoEdit = PhotoEdit() { didSet { save() } }
+    /// False while you're still being made (onboarding happens inside the field).
+    var attuned = false { didSet { save() } }
+    /// Bumped on reset so the field rebuilds from scratch.
+    var epoch = 0
 
-    private struct Saved: Codable { var me: Soul?; var bonds: [BondRecord]; var photoEdit: PhotoEdit? }
+    private struct Saved: Codable { var me: Soul?; var bonds: [BondRecord]; var photoEdit: PhotoEdit?; var attuned: Bool? }
     private static let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
     private let url = Store.dir.appendingPathComponent("starfall.json")
     private static func file(_ name: String) -> URL { dir.appendingPathComponent(name) }
@@ -30,12 +34,13 @@ final class Store {
         if let data = try? Data(contentsOf: url), let s = try? JSONDecoder().decode(Saved.self, from: data) {
             me = s.me; bonds = s.bonds
             if let e = s.photoEdit { photoEdit = e }
+            attuned = s.attuned ?? (s.me != nil)
         }
         photo = Store.image("photo.jpg")
     }
 
     private func save() {
-        let s = Saved(me: me, bonds: bonds, photoEdit: photoEdit)
+        let s = Saved(me: me, bonds: bonds, photoEdit: photoEdit, attuned: attuned)
         if let data = try? JSONEncoder().encode(s) { try? data.write(to: url, options: .atomic) }
     }
 
@@ -74,5 +79,5 @@ final class Store {
     }
     var bonded: [BondRecord] { bonds.filter { $0.choice == .bonded }.sorted { $0.date > $1.date } }
 
-    func reset() { me = nil; bonds = []; removePhoto() }
+    func reset() { me = nil; bonds = []; attuned = false; removePhoto(); epoch += 1 }
 }

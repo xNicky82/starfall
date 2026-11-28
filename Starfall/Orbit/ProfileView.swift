@@ -4,7 +4,6 @@ import SwiftUI
 /// Every edit writes to `store.me`, and the orb above recolours live.
 struct ProfileLayer: View {
     @Bindable var orbit: Orbit
-    @Binding var editing: Bool
     @Environment(Store.self) private var store
     @State private var adding = false
     @State private var open: String?
@@ -30,14 +29,6 @@ struct ProfileLayer: View {
                         coloursSection(me)
                         interestsSection(me, soul)
                         valuesSection(me, soul)
-                        Button { editing = true } label: {
-                            Text("Open the Essence lab")
-                                .font(.system(size: 15, weight: .semibold))
-                                .foregroundStyle(OrbPalette.paper)
-                                .frame(maxWidth: .infinity).padding(.vertical, 14)
-                                .background(OrbPalette.ink, in: Capsule())
-                        }
-                        .buttonStyle(.plain)
                     }
                     .foregroundStyle(OrbPalette.ink)
                     .padding(.horizontal, 20)

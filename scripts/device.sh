@@ -10,6 +10,6 @@ UDID=$(xcodebuild -project Starfall.xcodeproj -scheme Starfall -showdestinations
 [ -n "$UDID" ] || { echo "No iPhone connected"; exit 1; }
 xcodebuild -project Starfall.xcodeproj -scheme Starfall -destination "id=$UDID" \
   -derivedDataPath build/dd -allowProvisioningUpdates build -quiet
-CORE=$(xcrun devicectl list devices 2>/dev/null | awk '/connected/ && /iPhone/ {print $3; exit}')
+CORE=$(xcrun devicectl list devices 2>/dev/null | awk '/iPhone/ && (/connected/ || /available/) {print $3; exit}')
 xcrun devicectl device install app --device "$CORE" build/dd/Build/Products/Debug-iphoneos/Starfall.app >/dev/null
 xcrun devicectl device process launch --device "$CORE" com.xnicky82.starfall >/dev/null && echo "Starfall launched on $DEVICE_NAME"

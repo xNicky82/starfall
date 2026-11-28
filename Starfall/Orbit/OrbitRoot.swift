@@ -16,7 +16,9 @@ struct OrbitRoot: View {
             }
             .frame(width: g.size.width, height: g.size.height)
             .onAppear {
+                if store.me == nil { store.me = Soul(name: "") }
                 let o = orbit ?? Orbit(store: store)
+                o.attuning = !store.attuned
                 o.reduceMotion = reduceMotion
                 o.setScreen(size: g.size, insets: OrbitRoot.insets(g), scale: displayScale)
                 o.start()
@@ -41,7 +43,6 @@ struct OrbitRoot: View {
 
 struct OrbitStage: View {
     let orbit: Orbit
-    @State private var editing = false
 
     var body: some View {
         ZStack(alignment: .topLeading) {
@@ -50,15 +51,19 @@ struct OrbitStage: View {
             ProfilePhoto(orbit: orbit)
 
             Group {
-                switch orbit.tab {
-                case .home: HomeGlows(orbit: orbit)
-                case .friends: FriendsLayer(orbit: orbit)
-                case .inbox: InboxLayer(orbit: orbit)
-                case .profile: ProfileLayer(orbit: orbit, editing: $editing)
+                if orbit.attuning {
+                    AttuneLayer(orbit: orbit)
+                } else {
+                    switch orbit.tab {
+                    case .home: HomeGlows(orbit: orbit)
+                    case .friends: FriendsLayer(orbit: orbit)
+                    case .inbox: InboxLayer(orbit: orbit)
+                    case .profile: ProfileLayer(orbit: orbit)
+                    }
                 }
             }
             .transition(.opacity.combined(with: .offset(y: 8)))
-            .id(orbit.tab)
+            .id(orbit.attuning ? -1 : orbit.tab.rawValue)
 
             OrbitCardHost(orbit: orbit)
 
@@ -73,21 +78,20 @@ struct OrbitStage: View {
                     .allowsHitTesting(false)
             }
 
-            OrbitTabBar(orbit: orbit)
-                .frame(maxWidth: 440)
-                .padding(.horizontal, max(16, orbit.insets.leading))
-                .frame(width: orbit.size.width)
-                .position(x: orbit.size.width / 2, y: orbit.barTop + 31)
+            if !orbit.attuning {
+                OrbitTabBar(orbit: orbit)
+                    .frame(maxWidth: 440)
+                    .padding(.horizontal, max(16, orbit.insets.leading))
+                    .frame(width: orbit.size.width)
+                    .position(x: orbit.size.width / 2, y: orbit.barTop + 31)
+                    .transition(.opacity.combined(with: .offset(y: 30)))
+            }
         }
         .frame(width: orbit.size.width, height: orbit.size.height)
         .animation(.easeInOut(duration: 0.35), value: orbit.tab)
         .animation(.spring(response: 0.45, dampingFraction: 0.85), value: orbit.sheet)
         .animation(.easeInOut(duration: 0.3), value: orbit.toast)
-        .sheet(isPresented: $editing, onDismiss: { orbit.refreshMe() }) {
-            EssenceView()
-                .presentationDragIndicator(.visible)
-                .background(Paper())
-        }
+        .animation(.easeInOut(duration: 0.6), value: orbit.attuning)
     }
 }
 
@@ -155,7 +159,7 @@ struct OrbLabels: View {
 
     var body: some View {
         let _ = orbit.frame
-        let show = orbit.tab == .home || orbit.tab == .friends
+        let show = !orbit.attuning && (orbit.tab == .home || orbit.tab == .friends)
         let compact = orbit.zoom < 0.8
         let sc = CGFloat(0.62 + 0.38 * min(1, orbit.zoom))
         ZStack(alignment: .topLeading) {

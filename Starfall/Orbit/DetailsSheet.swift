@@ -8,6 +8,7 @@ struct DetailsSheet: View {
     @State private var pick: PhotosPickerItem?
     @State private var cropping: CropJob?
     @State private var editing: EditJob?
+    @State private var confirmReset = false
 
     var body: some View {
         NavigationStack {
@@ -56,6 +57,19 @@ struct DetailsSheet: View {
                         ForEach(Basics.educations, id: \.self) { Text($0).tag(Optional($0)) }
                     }
                 }
+
+                Section {
+                    Button("Start over", role: .destructive) { confirmReset = true }
+                        .frame(maxWidth: .infinity)
+                }
+            }
+            .confirmationDialog("Start over?", isPresented: $confirmReset, titleVisibility: .visible) {
+                Button("Erase me and start over", role: .destructive) {
+                    dismiss()
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) { store.reset() }
+                }
+            } message: {
+                Text("Your nature, interests, values, bonds and photo are erased.")
             }
             .scrollContentBackground(.hidden)
             .background(OrbPalette.ground)
